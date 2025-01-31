@@ -3,6 +3,7 @@
   position: absolute;
   max-width: 90%;
   height: auto;
+  pointer-events: none;
 }
 /* Hero Image Positions - Desktop View */
 .hero img:nth-child(1) {
