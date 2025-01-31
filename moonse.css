@@ -1,0 +1,43 @@
+.moon-info__container {
+  width: var(--container-width);
+  margin: 0 auto;
+}
+
+.moon-info__tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1.4rem;
+  padding: 1.2rem 4rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.moon-info__tab:hover {
+  background: #000;
+}
+.moon-info__tab:hover h3 {
+  color: #ddd;
+}
+.moon-info__tab h3 {
+  font-size: clamp(3rem, 3.5vw, 6.4rem);
+  letter-spacing: -0.4px;
+  color: #333;
+}
+
+#hover-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url(assets/MoonNasa/Photo1.jpg) no-repeat center fixed;
+  background-size: contain;
+  width: 40%; 
+  height: 300px !important;
+  height: auto;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+  z-index: 80;
+}

@@ -9,6 +9,7 @@
     <title>Space Explorers</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./heroImages.css" />
+    <link rel="stylesheet" href="./moonse.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1/bundled/lenis.min.js"></script>
@@ -36,8 +37,8 @@
 
     <section id="home" class="hero">
       <!-- <hgroup> -->
-        <h1 class="hero__title">
-          <div>
+      <h1 class="hero__title">
+        <div>
           <span>S</span>
           <span>p</span>
           <span>a</span>
@@ -56,7 +57,7 @@
           <span>s</span>
         </div>
       </h1>
-    <!-- </hgroup> -->
+      <!-- </hgroup> -->
       <div class="hero__images">
         <img src="./assets/MoonNasa/Photo7.jpg" alt="Astronaut" />
         <img src="./assets/MoonNasa/Photo1.jpg" alt="Rocket Launch" />
@@ -137,6 +138,32 @@
         <button>Join the Mission</button>
       </div>
     </section>
+    <section class="moon_info">
+      <div class="moon-info__container">
+        <div class="moon-info__tab">
+          <h3>Moon Formation</h3>
+        </div>
+        <div class="moon-info__tab">
+          <h3>Lunar Surface</h3>
+        </div>
+        <div class="moon-info__tab">
+          <h3>Moon Phases</h3>
+        </div>
+        <div class="moon-info__tab">
+          <h3>Lunar Exploration</h3>
+        </div>
+        <div class="moon-info__tab">
+          <h3>Moon's Gravity</h3>
+        </div>
+        <div class="moon-info__tab">
+          <h3>Lunar Eclipses</h3>
+        </div>
+        <div class="moon-info__tab">
+          <h3>Future Missions</h3>
+        </div>
+      </div>
+      <div id="hover-image"></div>
+    </section>
     <section id="footer" class="footer">
       <div class="footer__inner">
         <div class="footer__links">
@@ -155,5 +182,6 @@
     </section>
     <button id="scrollToTopBtn" title="Go to top">↑</button>
     <script src="index.js"></script>
+    <script src="hoverImage.js"></script>
   </body>
 </html>
