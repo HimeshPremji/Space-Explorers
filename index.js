@@ -6,27 +6,23 @@ document.addEventListener("DOMContentLoaded", () => {
     wheelMultiplier: window.innerWidth < 768 ? 0.8 : 1, // Adjust wheel sensitivity for mobile
   });
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
 
-    // Scroll to top button logic
-    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-    // Show the button when the user scrolls down 20px from the top
-    window.onscroll = function() {
-      if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
-        scrollToTopBtn.style.display = "block";
-      } else {
-        scrollToTopBtn.style.display = "none";
-      }
-    };
+  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+  let scrollTimer;
   
-    // Scroll to the top of the document when the button is clicked
+  window.addEventListener("scroll", () => {
+    scrollToTopBtn.style.display = "none";
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => (scrollToTopBtn.style.display = "block"), 100);
+  });
+  
+  
     scrollToTopBtn.addEventListener("click", () => {
-      lenis.scrollTo("top", { duration: 1 }); // Smooth scroll to the top using Lenis
+      lenis.scrollTo("top", { duration: 1 });
     });
 
   // Responsive animation handler
@@ -52,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const splitTypes = document.querySelectorAll(".text__effect p");
-    splitTypes.forEach((char, idx) => {
+    splitTypes.forEach( char => {
       const text = new SplitType(char, { types: "chars" });
 
       gsap.from(text.chars, {
@@ -64,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
           trigger: char,
           start: "top 70%",
           end: "top 40%",
-          markers: false,
           scrub: 0.5,
         },
       });
@@ -106,8 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         strokeDashoffset: 0,
         scrollTrigger: {
           trigger: ".mission",
-          markers: true,
-          scrub: 0.6,
+          scrub: 1,
           start: isMobile ? "top 80%" : "top 70%",
           end: isMobile ? "top 20%" : "top 30%",
         },
@@ -119,44 +113,28 @@ document.addEventListener("DOMContentLoaded", () => {
       paddingBottom: 0,
       duration: isMobile ? 2 : 3.5,
     });
-    // First animation for background
     gsap.to(".footer__inner", {
       background: "pink",
       scrollTrigger: {
         trigger: ".footer",
         start: isMobile ? "top 0%" : "top 16%",
         end: isMobile ? "top center" : "top center",
-        scrub: isMobile ? 1 : 0.4, // Use numeric scrub values for consistency
-        markers: false, // Keep markers for debugging
+        scrub: isMobile ? 1 : 0.4, 
         ease: "power4.inOut",
       },
     });
 
-    // Second animation for links with synchronized timing
     gsap.to(".footer__inner a", {
       color: "red",
-      stagger: isMobile ? 0.2 : 0.1, // Reduced stagger for smoothness
+      stagger: isMobile ? 0.2 : 0.1,
       scrollTrigger: {
         trigger: ".footer",
         start: isMobile ? "top 0%" : "top 16%",
         end: isMobile ? "top center" : "top center",
-        scrub: isMobile ? 1 : 0.4, // Match exact scrub value
+        scrub: isMobile ? 1 : 0.4,
         ease: "power4.inOut",
       },
     });
-
-    // gsap.from(".footer__inner a", {
-    //   x: isMobile ? 20 : 50,
-    //   opacity: 0,
-    //   stagger: isMobile ? 0.3 : 0.6,
-    //   scrollTrigger: {
-    //     trigger: ".footer",
-    //     markers: false,
-    //     start: isMobile ? "top 70%" : "top 32%",
-    //     end: isMobile ? "top 24%" : "top 10%",
-    //     scrub: 1,
-    //   },
-    // });
   }
 
   // Initialize animations
