@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   moonTabs.forEach((tab) => {
-    tab.addEventListener("mouseenter", (e) => {
+    tab.addEventListener("mouseenter", () => {
       const text = tab.querySelector("h3").textContent.trim();
       if (images[text]) {
-        hoverImage.style.backgroundImage = `url(${images[text]})`; // Corrected
+        hoverImage.style.backgroundImage = `url(${images[text]})`;
         hoverImage.style.opacity = "1";
       }
     });
@@ -28,10 +28,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tab.addEventListener("mousemove", (e) => {
       gsap.to(hoverImage, {
-        x: e.clientX,
-        y: e.clientY - 30,
-        duration: 0.2,
+        x: e.clientX + 20,
+        y: e.clientY - 100,
+        duration: 0.6,
         ease: "power2.out",
+      });
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".moon-info__tab");
+
+  tabs.forEach((tab) => {
+    const baby1 = tab.querySelector(".baby1");
+    const baby2 = tab.querySelector(".baby2");
+    const h3 = tab.querySelector("h3");
+
+    tab.addEventListener("mouseenter", () => {
+      gsap.to([baby1, baby2], {
+        height: "50%",
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      gsap.to(h3, {
+        color: "#ddd",
+        duration: 0.3,
+      });
+    });
+
+    tab.addEventListener("mouseleave", () => {
+      gsap.to([baby1, baby2], {
+        height: "0%",
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      gsap.to(h3, {
+        color: "#333",
+        duration: 0.3,
       });
     });
   });

@@ -5,27 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const lenis = new Lenis({
     lerp: 0.1,
     smooth: true,
-    wheelMultiplier: window.innerWidth < 768 ? 0.8 : 1, // Adjust wheel sensitivity for mobile
+    wheelMultiplier: window.innerWidth < 768 ? 0.86 : 0.97, // Adjust wheel sensitivity for mobile
   });
 
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
-
+  
   const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-  let scrollTimer;
-
-  window.addEventListener("scroll", () => {
-    scrollToTopBtn.style.display = "none";
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(
-      () => (scrollToTopBtn.style.display = "block"),
-      100
-    );
-  });
 
   scrollToTopBtn.addEventListener("click", () => {
-    lenis.scrollTo("top", { duration: 1 });
+    lenis.scrollTo("top", { duration: 2.4 });
+    setTimeout(heroAnim, 900)
   });
 
   // Responsive animation handler
@@ -33,22 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const isMobile = window.innerWidth < 768;
 
     // Hero animations
-    gsap.from(".hero__title span", {
-      duration: isMobile ? 1 : 1.5,
-      y: isMobile ? 50 : 100,
-      opacity: 0,
-      stagger: isMobile ? 0.1 : 0.05,
-      ease: "power4.out",
-    });
+     heroAnim = () => {
 
-    gsap.from(".hero img", {
-      duration: isMobile ? 1 : 1.5,
-      scale: isMobile ? 0.9 : 0.8,
-      opacity: 0,
-      stagger: isMobile ? 0.1 : 0.2,
-      ease: "expo.out",
-    });
-
+      gsap.from(".hero__title span", {
+        duration: isMobile ? 1 : 1.5,
+        y: isMobile ? 50 : 100,
+        opacity: 0,
+        stagger: isMobile ? 0.1 : 0.05,
+        ease: "power4.out",
+      });
+      
+      gsap.from(".hero img", {
+        duration: isMobile ? 1 : 1.5,
+        scale: isMobile ? 0.9 : 0.8,
+        opacity: 0,
+        stagger: isMobile ? 0.1 : 0.2,
+        ease: "expo.out",
+      });
+    }
+    heroAnim()
     const splitTypes = document.querySelectorAll(".text__effect p");
     splitTypes.forEach((char) => {
       const text = new SplitType(char, { types: "chars" });
@@ -120,35 +114,8 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       });
     }
-
-    // Footer animations
-    gsap.from(".footer", {
-      paddingBottom: 0,
-      duration: isMobile ? 2 : 3.5,
-    });
-    gsap.to(".footer__inner", {
-      background: "pink",
-      scrollTrigger: {
-        trigger: ".footer",
-        start: isMobile ? "top 0%" : "top 16%",
-        end: isMobile ? "top center" : "top center",
-        scrub: isMobile ? 1 : 0.4,
-        ease: "power4.inOut",
-      },
-    });
-
-    gsap.to(".footer__inner a", {
-      color: "red",
-      stagger: isMobile ? 0.2 : 0.1,
-      scrollTrigger: {
-        trigger: ".footer",
-        start: isMobile ? "top 0%" : "top 16%",
-        end: isMobile ? "top center" : "top center",
-        scrub: isMobile ? 1 : 0.4,
-        ease: "power4.inOut",
-      },
-    });
   }
+
 
   handleResponsiveAnimations();
 

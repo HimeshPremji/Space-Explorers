@@ -295,53 +295,23 @@ button {
 
 .footer__links {
   margin-top: 12rem;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  padding: 4rem;
   text-align: center;
 }
 
-.footer__links div {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-}
-
-.footer__links a {
+ .footer__links h2 {
   width: 100%;
   color: white;
   text-decoration: none;
-  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
-}
-.footer__links a:hover {
+} 
+.footer__links h2:hover {
   text-decoration: underline;
 }
-#scrollToTopBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background-color: #000;
-  color: white;
-  /* color: #5c5c5c; */
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 50%;
-  font-size: 18px;
-}
-
-#scrollToTopBtn:hover {
-  background-color: #030303c7;
-}
-
 
 /* Media Queries */
 @media (max-width: 768px) {
