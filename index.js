@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize Lenis smooth scrolling
+
+  // gsap.registerPlugin(ScrollTrigger);
+
   const lenis = new Lenis({
     lerp: 0.1,
     smooth: true,
@@ -10,25 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
     lenis.raf(time * 1000);
   });
 
-
   const scrollToTopBtn = document.getElementById("scrollToTopBtn");
   let scrollTimer;
-  
+
   window.addEventListener("scroll", () => {
     scrollToTopBtn.style.display = "none";
     clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => (scrollToTopBtn.style.display = "block"), 100);
+    scrollTimer = setTimeout(
+      () => (scrollToTopBtn.style.display = "block"),
+      100
+    );
   });
-  
-  
-    scrollToTopBtn.addEventListener("click", () => {
-      lenis.scrollTo("top", { duration: 1 });
-    });
+
+  scrollToTopBtn.addEventListener("click", () => {
+    lenis.scrollTo("top", { duration: 1 });
+  });
 
   // Responsive animation handler
   function handleResponsiveAnimations() {
     const isMobile = window.innerWidth < 768;
-    const vh = window.innerHeight * 0.01;
 
     // Hero animations
     gsap.from(".hero__title span", {
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const splitTypes = document.querySelectorAll(".text__effect p");
-    splitTypes.forEach( char => {
+    splitTypes.forEach((char) => {
       const text = new SplitType(char, { types: "chars" });
 
       gsap.from(text.chars, {
@@ -64,18 +66,29 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       });
     });
+    
+    // ScrollTrigger.create({
+    //   trigger: "#collection",
+    //   start: "top center",
+    //   end: "bottom center",
+    //   onEnter: () => gsap.to("body", { background: "black",}),
+    //   onEnterBack: () => gsap.to("body", { background: "black",}),
+    //   onLeave: () => gsap.to("body", { background: "white",}),
+    //   onLeaveBack: () => gsap.to("body", { background: "white",})
+    // })
 
-    // Fullwidth image animations
     const fullwidthTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".fullwidth-image",
-        start: "top bottom",
+        start: "top 66%",
         end: "top top",
-        scrub: 1,
+        // markers: true,
+        scrub: true,
       },
     });
 
     fullwidthTimeline
+
       .to(".fullwidth-image__overlay", { opacity: 0, duration: 3 })
       .from(".fullwidth-image img", { scale: isMobile ? 1.1 : 1.2 }, 0)
       .from(
@@ -119,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         trigger: ".footer",
         start: isMobile ? "top 0%" : "top 16%",
         end: isMobile ? "top center" : "top center",
-        scrub: isMobile ? 1 : 0.4, 
+        scrub: isMobile ? 1 : 0.4,
         ease: "power4.inOut",
       },
     });
@@ -137,12 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Initialize animations
   handleResponsiveAnimations();
 
-  // Refresh ScrollTrigger on resize
   window.addEventListener("resize", () => {
     ScrollTrigger.refresh();
-    lenis.resize(); // Reset Lenis scroll
+    lenis.resize();
   });
 });
