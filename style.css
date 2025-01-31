@@ -324,13 +324,23 @@ button {
   background-color: #000;
   color: white;
   cursor: pointer;
-  padding: 15px;
+  padding: 25px;
   border-radius: 50%;
   font-size: 18px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 #scrollToTopBtn:hover {
-  background-color: #030303c7;
+  transition: background, scale 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  scale: 1.06;
+  background-color: #030303d0;
+  -webkit-transition: background, scale 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  -moz-transition: background, scale 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  -ms-transition: background, scale 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  -o-transition: background, scale 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 /* Media Queries */
