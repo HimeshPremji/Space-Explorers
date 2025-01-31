@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   // gsap.registerPlugin(ScrollTrigger);
 
   const lenis = new Lenis({
@@ -11,12 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
-  
+
   const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
   scrollToTopBtn.addEventListener("click", () => {
     lenis.scrollTo("top", { duration: 2.4 });
-    setTimeout(heroAnim, 900)
+    setTimeout(heroAnim, 900);
   });
 
   // Responsive animation handler
@@ -24,8 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const isMobile = window.innerWidth < 768;
 
     // Hero animations
-     heroAnim = () => {
-
+    heroAnim = () => {
       gsap.from(".hero__title span", {
         duration: isMobile ? 1 : 1.5,
         y: isMobile ? 50 : 100,
@@ -33,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         stagger: isMobile ? 0.1 : 0.05,
         ease: "power4.out",
       });
-      
+
       gsap.from(".hero img", {
         duration: isMobile ? 1 : 1.5,
         scale: isMobile ? 0.9 : 0.8,
@@ -41,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         stagger: isMobile ? 0.1 : 0.2,
         ease: "expo.out",
       });
-    }
-    heroAnim()
+    };
+    heroAnim();
     const splitTypes = document.querySelectorAll(".text__effect p");
     splitTypes.forEach((char) => {
       const text = new SplitType(char, { types: "chars" });
@@ -60,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       });
     });
-    
+
     // ScrollTrigger.create({
     //   trigger: "#collection",
     //   start: "top center",
@@ -71,29 +69,39 @@ document.addEventListener("DOMContentLoaded", () => {
     //   onLeaveBack: () => gsap.to("body", { background: "white",})
     // })
 
-    const fullwidthTimeline = gsap.timeline({
+    gsap.to(".fullwidth-image__overlay", {
+      opacity: 0,
+      duration: 3,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: ".fullwidth-image",
         start: "top 66%",
         end: "top top",
-        // markers: true,
         scrub: true,
       },
     });
-
-    fullwidthTimeline
-
-      .to(".fullwidth-image__overlay", { opacity: 0, duration: 3 })
-      .from(".fullwidth-image img", { scale: isMobile ? 1.1 : 1.2 }, 0)
-      .from(
-        ".fullwidth-image__text",
-        {
-          opacity: 0,
-          y: isMobile ? 30 : 50,
-          duration: 2,
-        },
-        0.5
-      );
+    gsap.from(".fullwidth-image img", {
+      scale: isMobile ? 1.1 : 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".fullwidth-image",
+        start: "top 66%",
+        end: "top top",
+        scrub: true,
+      },
+    });
+    gsap.from(".fullwidth-image__text", {
+      opacity: 0,
+      y: isMobile ? 30 : 50,
+      duration: 2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".fullwidth-image",
+        start: "top 66%",
+        end: "top top",
+        scrub: true,
+      },
+    });
 
     // Mission underline animation
     const missionPath = document.querySelector(".mission path");
@@ -115,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
-
 
   handleResponsiveAnimations();
 
